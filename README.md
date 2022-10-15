@@ -42,6 +42,9 @@ Additional Notes:
 
 * Feel free to add more features to your own tasks as you guys see fit, the more we can do, the more marks we can get
 * Take a look at Notion, our app will be similar to Notion
+* Firebase Account: 
+  - email: firebaseacc001@gmail.com
+  - password: sharedAcc01
 
 
 

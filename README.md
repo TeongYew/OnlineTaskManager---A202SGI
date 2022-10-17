@@ -7,7 +7,7 @@ An online noting/task manager application that allows for personal use or collab
 
 List of Tasks:
 
-Tasks #1 [person in charge]
+Tasks #1 [Faisal]
 - Login/Register System
   - basic login and register
   - forgot/reset password *extra, do if possible

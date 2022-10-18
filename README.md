@@ -15,7 +15,7 @@ Tasks #1 [Faisal]
   - display user data
   - edit user data(username, password)
 
-Tasks #2 [person in charge]
+Tasks #2 [woei lee]
 - Main Menu
   - basic navigation system
 - UI/UX Design

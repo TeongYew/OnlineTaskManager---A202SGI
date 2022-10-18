@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "990560838974",
+    "project_id": "onlinetaskmanager-51f36",
+    "storage_bucket": "onlinetaskmanager-51f36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990560838974:android:f14a311393f7db5330f86f",
+        "android_client_info": {
+          "package_name": "com.example.onlinetaskmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990560838974-uq67kbip1t2ls4or390bv9r013d06od4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2kE51gx_IaGXr8CuML8vEhAR3sT7u3vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990560838974-uq67kbip1t2ls4or390bv9r013d06od4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

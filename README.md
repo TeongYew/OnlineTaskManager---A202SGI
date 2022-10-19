@@ -21,7 +21,7 @@ Tasks #2 [woei lee]
   - basic navigation system
 - UI/UX Design
 
-Tasks #3 [person in charge]
+Tasks #3 [Darwis]
 - Basic Noting System
   - write, edit and save notes
   - allow creator of note to delete

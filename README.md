@@ -10,6 +10,7 @@ List of Tasks:
 Tasks #1 [Faisal]
 - Login/Register System
   - basic login and register
+  - Login with Google Account
   - forgot/reset password *extra, do if possible
 - User Profile/Settings
   - display user data

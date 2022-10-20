@@ -111,10 +111,9 @@ public class RegisterActivity extends AppCompatActivity {
             });
 
             //Firestore insert code
-            //insert username and points=0
+            //insert username
             Map<String, Object> users = new HashMap<>();
             users.put("Username", username);
-            users.put("points", 0);
 
             db.collection("Users").document(email)
                     .set(users)

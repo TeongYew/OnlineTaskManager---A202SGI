@@ -26,8 +26,7 @@ Tasks #3 [Darwis]
   - write, edit and save notes
   - allow creator of note to delete
   - set status of task(incomplete, in progress, completed, etc) *extra, do if possible
-- Calendar System *might be harder than it seems, do some research and try to do if possible
-  - allow the users to add the tasks in the app into their Google Calendar
+
 
 Tasks #4 [Teong]
 - Database stuff
@@ -36,6 +35,8 @@ Tasks #4 [Teong]
   - Notes Database
 - Notification/Reminder System *might be harder than it seems 
   - send notification to notify/remind user when the due date/time of a task is close(1 day, 1 hour, 30 minutes, 15 minutes, etc)
+- Calendar System *might be harder than it seems, do some research and try to do if possible
+  - allow the users to add the tasks in the app into their Google Calendar
 
 
 

@@ -18,6 +18,16 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/login_discription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:fontFamily="@font/bad_script"
+        android:text="@string/login_text2" />
+
+
+    <TextView
         android:id="@+id/fstTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,6 +36,7 @@
         android:fontFamily="@font/bad_script"
         android:text="@string/email_text"
         android:textColor="#000000" />
+
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
@@ -53,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/login_text" />
+        android:text="@string/btn_text" />
 
     <TextView android:id="@+id/lnkRegister"
         android:layout_width="match_parent"

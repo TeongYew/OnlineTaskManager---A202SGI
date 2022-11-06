@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         AddNoteButtonMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateNote.class);
+                Intent intent = new Intent(view.getContext(), CreateNoteActivity.class);
                 view.getContext().startActivity(intent);}
         });
 

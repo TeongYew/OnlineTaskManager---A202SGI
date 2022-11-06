@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".CreateNote">
+    tools:context=".CreateNoteActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,6 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
+                android:id="@+id/saveButton"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_12sdp"

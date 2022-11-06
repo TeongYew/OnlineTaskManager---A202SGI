@@ -8,4 +8,6 @@
     <string name="search_notes">Search notes</string>
     <string name="NotesTitle">Title</string>
     <string name="note">Note</string>
+    <string name="TitleEmpty">Please provide note title</string>
+    <string name="ContentEmpty">Please provide note content</string>
 </resources>

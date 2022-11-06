@@ -14,7 +14,7 @@
         android:theme="@style/Theme.OnlineTaskManager"
         tools:targetApi="31">
         <activity
-            android:name=".CreateNote"
+            android:name=".CreateNoteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             />

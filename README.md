@@ -1,4 +1,4 @@
-# OnlineTaskManager---A202SGI
+# OnlineNotingApp---A202SGI
 
 Brief Description of the App:
 

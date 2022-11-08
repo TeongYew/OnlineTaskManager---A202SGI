@@ -11,5 +11,6 @@
     <color name="colorPrimaryDark">#292929</color>
     <color name="colorSearchBar">#3B3B3B</color>
     <color name="SearchTextHint">#BCAAA4</color>
+    <color name="SearchTextHintLight">#999CA8</color>
     <color name="AddNoteButton">#b02bfc</color>
 </resources>

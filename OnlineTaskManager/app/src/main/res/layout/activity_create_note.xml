@@ -13,12 +13,12 @@
         android:layout_marginBottom="@dimen/_40sdp"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/_10sdp">
-        
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true">
-            
+
             <ImageView
                 android:id="@+id/backButton"
                 android:layout_width="@dimen/_30sdp"
@@ -28,9 +28,9 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_back_arrow"
-                app:tint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/saveButton"
@@ -41,9 +41,9 @@
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_4sdp"
                 android:src="@drawable/ic_check_mark"
-                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/backButton"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/white" />
 
             <EditText
                 android:id="@+id/EntryTitle"
@@ -58,7 +58,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:textColor="@color/white"
-                android:textColorHint="@color/SearchTextHint"
+                android:textColorHint="@color/SearchTextHintLight"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
@@ -72,12 +72,53 @@
                 app:layout_constraintStart_toStartOf="@id/EntryTitle"
                 app:layout_constraintTop_toBottomOf="@id/EntryTitle" />
 
+            <TextView
+                android:id="@+id/SetDeadlineText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SetDeadline"
+                android:textColor="@color/SearchTextHint"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="@id/EntryDateTime"
+                app:layout_constraintTop_toBottomOf="@id/EntryDateTime" />
+
+
+            <TextView
+                android:id="@+id/DateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:paddingTop="@dimen/_2sdp"
+                android:text="@string/Date"
+                android:textColor="@color/SearchTextHint"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toTopOf="@id/EntryContent"
+                app:layout_constraintStart_toEndOf="@+id/SetDeadlineText"
+                app:layout_constraintTop_toBottomOf="@+id/EntryDateTime"
+                app:layout_constraintVertical_bias="0.434" />
+
+
+            <TextView
+                android:id="@+id/TimeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="156dp"
+                android:paddingTop="@dimen/_2sdp"
+                android:text="@string/Time"
+                android:textColor="@color/SearchTextHint"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toTopOf="@id/EntryContent"
+                app:layout_constraintStart_toEndOf="@+id/SetDeadlineText"
+                app:layout_constraintTop_toBottomOf="@+id/EntryDateTime"
+                app:layout_constraintVertical_bias="0.434" />
+
             <EditText
                 android:id="@+id/EntryContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:background="@null"
@@ -87,14 +128,12 @@
                 android:inputType="text"
                 android:minHeight="@dimen/_100sdp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/SearchTextHint"
+                android:textColorHint="@color/SearchTextHintLight"
                 android:textSize="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/EntryDateTime"
                 app:layout_constraintStart_toStartOf="@id/EntryDateTime"
-                app:layout_constraintTop_toBottomOf="@id/EntryDateTime"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-
+                app:layout_constraintTop_toBottomOf="@id/SetDeadlineText" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

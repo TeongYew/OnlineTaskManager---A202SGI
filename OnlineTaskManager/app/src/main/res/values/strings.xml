@@ -10,4 +10,7 @@
     <string name="note">Note</string>
     <string name="TitleEmpty">Please provide note title</string>
     <string name="ContentEmpty">Please provide note content</string>
+    <string name="SetDeadline">Set Task Deadline :</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
 </resources>

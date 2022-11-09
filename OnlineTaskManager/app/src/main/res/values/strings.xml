@@ -13,4 +13,5 @@
     <string name="SetDeadline">Set Task Deadline :</string>
     <string name="Date">Date</string>
     <string name="Time">Time</string>
+    <string name="CreationSuccess">Note saved</string>
 </resources>

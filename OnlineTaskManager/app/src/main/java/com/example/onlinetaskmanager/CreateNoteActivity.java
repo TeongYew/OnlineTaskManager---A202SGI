@@ -36,6 +36,7 @@ import java.util.Map;
 public class CreateNoteActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String dummyuserID = "1111";
     private EditText EntryTitle, EntryContent;
     private TextView EntryDateTime, DateButtonText, TimeButton;
     int hour, minute;
@@ -131,11 +132,16 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
         }
     }
 
-    //Add note to hashmap to upload to firestore. FIX HERE <----------------
+    //Add note to hashmap to upload to firestore. link to user id and insert into user_note collection.
     public void saveNote() {
         Map<String, Object> note = new HashMap<>();
-        note.put("note_content", EntryContent.toString());
-        note.put("note_title", EntryTitle.toString());
+        note.put("note_content", EntryContent.getText().toString());
+        note.put("note_title", EntryTitle.getText().toString());
+
+        Map<String, Object> notes_users = new HashMap<>();
+        notes_users.put("notes_id", ); //generate user ID then add here to add to firestore.
+        notes_users.put("user_id", dummyuserID); //find a way to pull user id for now can use dummy for testing.
+
 
         db.collection("notes")
                 .add(note)
@@ -151,6 +157,15 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+        db.collection("notes_users")
+                .add(notes_users)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " );
+                    }
+                })
     }
 
     @Override

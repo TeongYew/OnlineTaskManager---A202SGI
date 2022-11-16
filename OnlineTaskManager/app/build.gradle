@@ -41,8 +41,20 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.0'
+
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
+
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //implement scalable size unit
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
+
+    //google material
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

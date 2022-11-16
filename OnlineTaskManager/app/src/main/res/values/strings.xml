@@ -5,4 +5,15 @@
     <string name="password_text">Password</string>
     <string name="register_link_text">New to Online Task Manager? Register here</string>
     <string name="login_divider_text">--------------- Or ---------------</string>
+    <string name="NotesMainTitle">Notes</string>
+    <string name="search_notes">Search notes</string>
+    <string name="NotesTitle">Title</string>
+    <string name="note">Note</string>
+    <string name="TitleEmpty">Please provide note title</string>
+    <string name="ContentEmpty">Please provide note content</string>
+    <string name="SetDeadline">Set Task Deadline :</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="CreationSuccess">Note saved</string>
+
 </resources>

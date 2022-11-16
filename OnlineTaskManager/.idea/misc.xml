@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/DELL/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/activity_login.xml" value="0.22333333333333336" />
         <entry key="..\:/Users/DELL/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/activity_register.xml" value="0.17685185185185184" />
+
+        <entry key="..\:/Users/DELL/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/activity_signout.xml" value="0.175" />
+
         <entry key="..\:/Users/user/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/drawable/add_note_background.xml" value="0.1165" />
         <entry key="..\:/Users/user/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/drawable/add_note_button.xml" value="0.1165" />
         <entry key="..\:/Users/user/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/drawable/ic_add_note.xml" value="0.1165" />
@@ -18,6 +21,7 @@
         <entry key="..\:/Users/user/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/user/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/note_container.xml" value="0.2015625" />
         <entry key="..\:/Users/user/Documents/GitHub/OnlineTaskManager---A202SGI/OnlineTaskManager/app/src/main/res/layout/writing_activity.xml" value="0.17300724637681159" />
+
         <entry key="..\:/xampp/htdocs/healthAdvisorApp/Health-Advisor-App/OnlineTaskManager/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
       </map>
     </option>

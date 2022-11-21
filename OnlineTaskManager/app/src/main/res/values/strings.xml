@@ -15,5 +15,10 @@
     <string name="Date">Date</string>
     <string name="Time">Time</string>
     <string name="CreationSuccess">Note saved</string>
+    <string name="profile_text">Profile</string>
+    <string name="forgot_password_text">Forgot Password?</string>
+    <string name="back_login_text">Return to sign in</string>
+    <string name="reset_password_text">Reset Password</string>
+    <string name="reset_password_instruction_text">Please enter your registered email to receive password reset link</string>
 
 </resources>

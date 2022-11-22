@@ -41,6 +41,7 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
     private EditText EntryTitle, EntryContent;
     private TextView EntryDateTime, DateButtonText, TimeButton;
     int hour, minute;
+    Calendar dueDateTime = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,26 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
         DateButtonMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePicker();
+                DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                        String date = year + "/" + month + "/" + day;
+                        DateButtonMain.setText(date);
+
+                        dueDateTime.set(Calendar.YEAR, year);
+                        dueDateTime.set(Calendar.MONTH, month);
+                        dueDateTime.set(Calendar.DAY_OF_MONTH, day);
+                    }
+                };
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        CreateNoteActivity.this,
+                        onDateSetListener,
+                        Calendar.getInstance().get(Calendar.YEAR),
+                        Calendar.getInstance().get(Calendar.MONTH),
+                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                );
+                datePickerDialog.show();
             }
         });
 
@@ -82,7 +102,21 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
         TimeButtonMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popTimePicker();
+                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String time = selectedHour + ":" + selectedMinute;
+                        TimeButtonMain.setText(time);
+
+                        dueDateTime.set(Calendar.HOUR_OF_DAY, selectedHour);
+                        dueDateTime.set(Calendar.MINUTE, selectedMinute);
+                        dueDateTime.set(Calendar.SECOND, 0);
+                    }
+                };
+                TimePickerDialog timePickerDialog = new TimePickerDialog(CreateNoteActivity.this, onTimeSetListener,hour,minute,true);
+
+                timePickerDialog.setTitle("Select Deadline Time");
+                timePickerDialog.show();
             }
         });
 

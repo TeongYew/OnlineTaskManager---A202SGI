@@ -1,7 +1,6 @@
 package com.example.onlinetaskmanager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -29,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView lnkRegister;
+    TextView lnkRegister, lnkForgotPassword;
     EditText txtEmail, txtPwd;
     Button btnLogin;
     ImageView btnGoogle;
@@ -46,14 +45,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Remove action bar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
         setContentView(R.layout.activity_login);
 
         lnkRegister = findViewById(R.id.lnkRegister);
+        lnkForgotPassword = findViewById(R.id.lnkForgotPassword);
 
         txtEmail = findViewById(R.id.txtEmail);
         txtPwd = findViewById(R.id.txtPwd);
@@ -72,7 +67,17 @@ public class LoginActivity extends AppCompatActivity {
         lnkRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "You can register now!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        lnkForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "You can reset your password now!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendUserToNextActivity() {
         finish();
-        Intent intent = new Intent(LoginActivity.this, SignoutActivity.class);
+        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
         String email = txtEmail.getText().toString();
         intent.putExtra("email", email);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

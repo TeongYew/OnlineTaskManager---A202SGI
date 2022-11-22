@@ -62,6 +62,16 @@
         android:paddingLeft="20dp"
         android:text="@string/common_signin_button_text" />
 
+    <TextView android:id="@+id/lnkForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/bad_script"
+        android:text="@string/forgot_password_text"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#3F51B5"/>
+
     <TextView
         android:id="@+id/dividerTxt"
         android:layout_width="wrap_content"
@@ -89,4 +99,5 @@
         android:gravity="center"
         android:textSize="18sp"
         android:textColor="#3F51B5"/>
+
 </LinearLayout>

@@ -84,9 +84,9 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = txtPwd2.getText().toString();
 
         if (!email.matches(emailPattern)){
-            txtEmail.setError("Enter correct email");
+            txtEmail.setError("Enter valid email");
         } else if (password.isEmpty()||password.length()<6){
-            txtPwd.setError("Enter proper password");
+            txtPwd.setError("Enter valid password");
         } else if (!password.equals(confirmPassword)){
             txtPwd2.setError("Password does not match");
         } else {
@@ -108,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Map<String, Object> users = new HashMap<>();
                         users.put("username", username);
                         users.put("email", email);
+                        users.put("user_id", userID);
                         documentReference.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {

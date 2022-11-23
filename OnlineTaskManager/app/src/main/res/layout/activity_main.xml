@@ -7,17 +7,40 @@
     android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
         android:id="@+id/NotesMainTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:text="@string/NotesMainTitle"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        tools:ignore="MissingConstraints"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:text="@string/NotesMainTitle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:layout_marginRight="25dp"
+            app:srcCompat="@drawable/ic_person"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/search_bar"
@@ -68,7 +91,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar"
         tools:layout_editor_absoluteX="3dp" />
-
 
 
     <ImageView

@@ -102,9 +102,9 @@ public class LoginActivity extends AppCompatActivity {
         String password = txtPwd.getText().toString();
 
         if (!email.matches(emailPattern)){
-            txtEmail.setError("Enter correct email");
+            txtEmail.setError("Enter valid email");
         } else if (password.isEmpty()||password.length()<6){
-            txtPwd.setError("Enter proper password");
+            txtPwd.setError("Enter valid password");
         } else {
             progressDialog.setMessage("Logging in...");
             progressDialog.setTitle("Login");
@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendUserToNextActivity() {
         finish();
-        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         String email = txtEmail.getText().toString();
         intent.putExtra("email", email);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

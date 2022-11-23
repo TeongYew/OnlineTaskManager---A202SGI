@@ -43,6 +43,7 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
+        <receiver android:name=".NotificationPublisher"></receiver>
     </application>
 
 </manifest>

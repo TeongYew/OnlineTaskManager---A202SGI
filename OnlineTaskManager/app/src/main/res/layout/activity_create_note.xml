@@ -7,127 +7,154 @@
     android:background="@color/colorPrimary"
     tools:context=".CreateNoteActivity">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/_40sdp"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/_10sdp">
+        android:animateLayoutChanges="true">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/save_note_button"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_check_mark"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:padding="5dp"
+            app:tint="@color/black" />
+
+        <EditText
+            android:id="@+id/EntryTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:hint="@string/NotesTitle"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/SearchTextHintLight"
+            android:textSize="@dimen/_16sdp"
+            android:layout_below="@+id/backButton"
+            android:padding="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/EntryTitle"
+            android:background="@android:color/black"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <LinearLayout
+            android:id="@+id/DeadlineBarLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/EntryTitle"
+            android:weightSum="7">
+
+            <TextView
+                android:id="@+id/SetDeadlineText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SetDeadline"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_weight="2"
+                android:paddingLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/DateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_2sdp"
+                android:text="@string/Date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:id="@+id/TimeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_2sdp"
+                android:text="@string/Time"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_weight="2"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reset"
+                android:layout_weight="1"
+                android:layout_marginRight="15dp"
+                android:backgroundTint="@color/ButtonPrimary"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:animateLayoutChanges="true">
-
-            <ImageView
-                android:id="@+id/backButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_back_arrow"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                app:tint="@color/white" />
-
-            <ImageView
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/save_note_button"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_check_mark"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp"
-                android:padding="5dp"
-                app:tint="@color/white" />
-
-            <EditText
-                android:id="@+id/EntryTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@null"
-                android:hint="@string/NotesTitle"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textColorHint="@color/SearchTextHintLight"
-                android:textSize="@dimen/_16sdp"
-                android:layout_below="@+id/backButton" />
-
-            <LinearLayout
-                android:id="@+id/DeadlineBarLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/EntryTitle"
-                android:weightSum="7">
-
-                <TextView
-                    android:id="@+id/SetDeadlineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/SetDeadline"
-                    android:textColor="@color/SearchTextHint"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_weight="2"
-                    android:paddingLeft="15dp"/>
-
-                <TextView
-                    android:id="@+id/DateButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_2sdp"
-                    android:text="@string/Date"
-                    android:textColor="@color/SearchTextHint"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_weight="2"/>
-
-                <TextView
-                    android:id="@+id/TimeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_2sdp"
-                    android:text="@string/Time"
-                    android:textColor="@color/SearchTextHint"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_weight="2"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reset"
-                    android:layout_weight="1"
-                    android:layout_marginRight="15dp"/>
-
-            </LinearLayout>
+            android:layout_below="@+id/DeadlineBarLL"
+            android:fillViewport="true">
 
             <EditText
                 android:id="@+id/EntryContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
-                android:layout_below="@+id/DeadlineBarLL"
-                android:background="@null"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_outline"
                 android:gravity="top"
                 android:hint="@string/note"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:minHeight="@dimen/_100sdp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="@color/SearchTextHintLight"
                 android:textSize="@dimen/_15sdp"
-                android:maxLines="9999999"/>
+                android:maxLines="9999999"
+                android:padding="10dp"/>
+
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/calendarFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_calendar"
+            android:backgroundTint="@color/ButtonSecondary"/>
 
 
-        </RelativeLayout>
 
-    </ScrollView>
+    </RelativeLayout>
+
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

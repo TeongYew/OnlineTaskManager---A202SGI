@@ -10,7 +10,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.TestLooperManager;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -20,12 +22,19 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,24 +50,33 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
     private EditText EntryTitle, EntryContent;
     private TextView EntryDateTime, DateButtonText, TimeButton;
     int hour, minute;
-    Calendar dueDateTime = Calendar.getInstance();
+    private ImageView backBtn;
+    String testNoteID2 = "3HnEyb2W1Ain6KiewNik";
+    String testUserId2 = "1112";
+    FloatingActionButton calendarFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
 
+        Calendar dueDateTime = Calendar.getInstance();
         EntryTitle = findViewById(R.id.EntryTitle);
         EntryContent = findViewById(R.id.EntryContent);
         //EntryDateTime = findViewById(R.id.EntryDateTime);
         DateButtonText = findViewById(R.id.DateButton);
         TimeButton = findViewById(R.id.TimeButton);
+        backBtn = findViewById(R.id.backButton);
+        calendarFAB = findViewById(R.id.calendarFAB);
 
         //Displaying current date and time of note creation.
 //        EntryDateTime.setText(
 //                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
 //                        .format(new Date())
 //        );
+
+        //getNoteWithNoteId();
+        getAllNotesWithUserId();
 
         //Button back to main menu. (need to add confirmation as well, "unsaved noted will be deleted")
         ImageView BackButtonMain = findViewById(R.id.backButton);
@@ -120,16 +138,37 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
+
+
         ImageView AddNoteButton = findViewById(R.id.saveButton);
         AddNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validateNote();
                 saveNote();
+                setReminder(dueDateTime);
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 view.getContext().startActivity(intent);
             }
         });
+
+        //set listener for the button to go back to main menu
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //go back to main menu
+                Intent intent = new Intent(CreateNoteActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        calendarFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setCalendar();
+            }
+        });
+
 
     }
 
@@ -170,18 +209,13 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
             Toast.makeText(CreateNoteActivity.this, R.string.ContentEmpty, Toast.LENGTH_SHORT).show();
         }
     }
-
+    String realNoteId;
     //Add note to hashmap to upload to firestore. link to user id and insert into user_note collection.
     public void saveNote() {
         Map<String, Object> note = new HashMap<>();
         note.put("note_content", EntryContent.getText().toString());
         note.put("note_title", EntryTitle.getText().toString());
         note.put("note_id", testnoteID);
-
-        Map<String, Object> notes_users = new HashMap<>();
-        notes_users.put("notes_id", testnoteID); //generate user ID then add here to add to firestore.
-        notes_users.put("user_id", dummyuserID); //find a way to pull user id for now can use dummy for testing.
-
 
         db.collection("notes")
                 .add(note)
@@ -190,29 +224,54 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         Toast.makeText(CreateNoteActivity.this, R.string.CreationSuccess, Toast.LENGTH_SHORT).show();
+                        realNoteId = documentReference.getId();
+
+                        Log.d(TAG, "saveNote: got to the update:" + realNoteId);
+                        db.collection("notes")
+                                .document(realNoteId)
+                                .update("note_id", realNoteId)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+
+                                        Map<String, Object> notes_users = new HashMap<>();
+                                        notes_users.put("notes_id", realNoteId); //generate user ID then add here to add to firestore.
+                                        notes_users.put("user_id", dummyuserID); //find a way to pull user id for now can use dummy for testing.
+
+                                        db.collection("notes_users")
+                                                .add(notes_users)
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error adding notes_users document", e);
+                                                    }
+                                                });
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error updating note_id document", e);
+                                    }
+                                });
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "Error adding notes document", e);
                     }
                 });
 
-        db.collection("notes_users")
-                .add(notes_users)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
     }
 
     @Override
@@ -221,4 +280,112 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
         String date = i2 + "/" + month + "/" + i;
         DateButtonText.setText(date);
     }
+
+    private void getNoteWithNoteId(){
+
+        db.collection("notes").document(testNoteID2)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        Log.d(TAG, "DocumentSnapshot data2: " + document.get("note_title"));
+                        EntryTitle.setText(document.get("note_title").toString());
+                        EntryContent.setText(document.get("note_content").toString());
+
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+    }
+
+    private void getAllNotesWithUserId(){
+        db.collection("notes_users")
+                .whereEqualTo("user_id", testUserId2)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            ArrayList<String> notesIdList = new ArrayList<String>();
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Log.d(TAG, document.getId() + " => " + document.get("notes_id"));
+                                notesIdList.add(document.get("notes_id").toString());
+                            }
+
+                            //loop through the arraylist that is holding all the notes_id of the user and get each note
+                            for(int i=0; i<notesIdList.size(); i++) {
+
+                                Log.d(TAG, "onComplete: " + i + notesIdList.get(i));
+
+                                db.collection("notes")
+                                        .whereEqualTo("note_id", notesIdList.get(i))
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        Log.d(TAG, document.getId() + " => " + document.getData());
+                                                        Log.d(TAG, document.getId() + " => " + document.get("note_title"));
+                                                        Log.d(TAG, document.getId() + " => " + document.get("note_content"));
+                                                    }
+
+                                                } else {
+                                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                                }
+                                            }
+                                        });
+
+                            }
+
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setReminder(Calendar c){
+
+        Log.d(TAG, "setReminder: got here");
+        Log.d(TAG, "startAlarm: " + c.get(Calendar.YEAR) + c.get(Calendar.MONTH) + c.get(Calendar.DAY_OF_MONTH) + c.get(Calendar.HOUR)+ c.get(Calendar.MINUTE));
+
+    }
+
+    private void setCalendar(){
+        if(!EntryTitle.getText().toString().isEmpty()){
+
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setData(CalendarContract.Events.CONTENT_URI);
+            intent.putExtra(CalendarContract.Events.TITLE, EntryTitle.getText().toString());
+
+            //extra features to include
+            intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+            //intent.putExtra(CalendarContract.Events.LAST_DATE, true);
+
+            try{
+                startActivity(intent);
+            }catch(Exception e){
+                Toast.makeText(this, "There is no app that can support this action", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, e.toString());
+            }
+
+        }
+        else{
+            Toast.makeText(this, "Please make sure all the fields are filled in", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

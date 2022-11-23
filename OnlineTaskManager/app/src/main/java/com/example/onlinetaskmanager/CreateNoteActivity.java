@@ -50,15 +50,15 @@ public class CreateNoteActivity extends AppCompatActivity implements DatePickerD
 
         EntryTitle = findViewById(R.id.EntryTitle);
         EntryContent = findViewById(R.id.EntryContent);
-        EntryDateTime = findViewById(R.id.EntryDateTime);
+        //EntryDateTime = findViewById(R.id.EntryDateTime);
         DateButtonText = findViewById(R.id.DateButton);
         TimeButton = findViewById(R.id.TimeButton);
 
         //Displaying current date and time of note creation.
-        EntryDateTime.setText(
-                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
-                        .format(new Date())
-        );
+//        EntryDateTime.setText(
+//                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
+//                        .format(new Date())
+//        );
 
         //Button back to main menu. (need to add confirmation as well, "unsaved noted will be deleted")
         ImageView BackButtonMain = findViewById(R.id.backButton);

@@ -37,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -120,6 +121,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                         Calendar.getInstance().get(Calendar.MONTH),
                         Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
                 );
+                datePickerDialog.setTitle("Select Deadline Date");
                 datePickerDialog.show();
             }
         });
@@ -150,18 +152,52 @@ public class CreateNoteActivity extends AppCompatActivity {
         AddNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validateNote();
-                //check if it's a new note using the intent that is sent
-                //addNote(dueDateTime);
-                updateNote(dueDateTime);
-                //if datebutton and timebutton is not its default value, that means it has been set
-                //so we can go into the setReminder function
-                if (!DateButton.getText().toString().equals("Date") && !TimeButton.getText().toString().equals("Time")){
-                    Log.d(TAG, "onClick: got into setReminder condition check");
-                    //setReminder(dueDateTime);
+
+                //Validate that note title and note content are filled.
+                if (EntryTitle.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(CreateNoteActivity.this, R.string.TitleEmpty, Toast.LENGTH_SHORT).show();
+                }else if(EntryContent.getText().toString().trim().isEmpty()){
+                    Toast.makeText(CreateNoteActivity.this, R.string.ContentEmpty, Toast.LENGTH_SHORT).show();
+                }else{
+
+                    //check if it's a new note using the intent that is sent
+
+
+                    //addNote(dueDateTime);
+
+                    //if dueDateTime is already set previously but not changed
+                    //we need to set dueDateTime again using the current date and time textview/button
+                    if (!DateButton.getText().toString().equals("Date") && !TimeButton.getText().toString().equals("Time")){
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
+                        try {
+
+                            Date dateTime = format.parse(DateButton.getText().toString() + " " + TimeButton.getText().toString());
+                            Log.d(TAG, "onClick: dis is parsed datetime: " + dateTime.toString());
+                            dueDateTime.setTime(dateTime);
+                            dueDateTime.add(Calendar.MONTH, 1);
+                            updateNote(dueDateTime);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+
+                    //if datebutton and timebutton is not its default value, that means it has been set
+                    //so we can go into the setReminder function
+                    if (!DateButton.getText().toString().equals("Date") && !TimeButton.getText().toString().equals("Time")){
+                        Log.d(TAG, "onClick: got into setReminder condition check");
+                        //setReminder(dueDateTime);
+                    }
+                    Intent intent = new Intent(view.getContext(), MainActivity.class);
+                    view.getContext().startActivity(intent);
+
                 }
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
-                view.getContext().startActivity(intent);
+
             }
         });
 
@@ -187,24 +223,14 @@ public class CreateNoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DateButton.setText("Date");
                 TimeButton.setText("Time");
+                //testing delete note method
+                deleteNote("44AG5nNic6H0c3PWoSKh");
             }
         });
 
 
     }
 
-
-
-    //Convert
-
-    //Validate that note title and note content are filled.
-    private void validateNote() {
-        if (EntryTitle.getText().toString().trim().isEmpty()) {
-            Toast.makeText(CreateNoteActivity.this, R.string.TitleEmpty, Toast.LENGTH_SHORT).show();
-        }else if(EntryContent.getText().toString().trim().isEmpty()){
-            Toast.makeText(CreateNoteActivity.this, R.string.ContentEmpty, Toast.LENGTH_SHORT).show();
-        }
-    }
 
     //Add note to hashmap to upload to firestore. link to user id and insert into user_note collection.
     public void addNote(Calendar c) {
@@ -451,6 +477,25 @@ public class CreateNoteActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "Please make sure all the fields are filled in", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void deleteNote(String noteId){
+
+        db.collection("notes").document(noteId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+
     }
 
 }

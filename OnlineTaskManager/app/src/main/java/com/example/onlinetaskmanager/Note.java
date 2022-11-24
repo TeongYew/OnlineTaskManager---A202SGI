@@ -1,45 +1,38 @@
 package com.example.onlinetaskmanager;
 
-import com.google.firebase.Timestamp;
-
 public class Note {
-    String title;
-    String content;
-    String id;
-    Timestamp deadline;
 
-    public Note() {
+    String note_title, note_content, note_id;
+
+    public Note(){}
+
+    public Note(String note_title, String note_content, String note_id) {
+        this.note_title = note_title;
+        this.note_content = note_content;
+        this.note_id = note_id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getNote_id() {
+        return note_id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNote_id(String note_id) {
+        this.note_id = note_id;
     }
 
-    public String getContent() {
-        return content;
+    public String getNote_title() {
+        return note_title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setNote_title(String note_title) {
+        this.note_title = note_title;
     }
 
-    public String getId() {
-        return id;
+    public String getNote_content() {
+        return note_content;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Timestamp getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Timestamp deadline) {
-        this.deadline = deadline;
+    public void setNote_content(String note_content) {
+        this.note_content = note_content;
     }
 }

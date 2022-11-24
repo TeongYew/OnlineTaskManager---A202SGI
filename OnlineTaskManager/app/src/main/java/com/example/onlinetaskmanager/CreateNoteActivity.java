@@ -70,7 +70,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_note);
 
         Calendar dueDateTime = Calendar.getInstance();
-        Calendar initialDateTime = Calendar.getInstance();
         EntryTitle = findViewById(R.id.EntryTitle);
         EntryContent = findViewById(R.id.EntryContent);
         //EntryDateTime = findViewById(R.id.EntryDateTime);
@@ -413,6 +412,9 @@ public class CreateNoteActivity extends AppCompatActivity {
                                                         Log.d(TAG, document.getId() + " => " + document.getData());
                                                         Log.d(TAG, document.getId() + " => " + document.get("note_title"));
                                                         Log.d(TAG, document.getId() + " => " + document.get("note_content"));
+
+                                                        //add it into recyclerview
+
                                                     }
 
                                                 } else {

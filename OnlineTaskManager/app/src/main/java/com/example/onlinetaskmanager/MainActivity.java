@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    RecyclerView recyclerView;
     ArrayList<Note> noteArrayList;
     MyAdapter myAdapter;
     String testUserId2 = "1112";
@@ -50,58 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
-    private void getAllNotesWithUserId(){
-        db.collection("notes_users")
-                .whereEqualTo("user_id", testUserId2)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            ArrayList<String> notesIdList = new ArrayList<String>();
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Log.d(TAG, document.getId() + " => " + document.get("notes_id"));
-                                notesIdList.add(document.get("notes_id").toString());
-                            }
-
-                            //loop through the arraylist that is holding all the notes_id of the user and get each note
-                            for(int i=0; i<notesIdList.size(); i++) {
-
-                                Log.d(TAG, "onComplete: " + i + notesIdList.get(i));
-
-                                db.collection("notes")
-                                        .whereEqualTo("note_id", notesIdList.get(i))
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        Log.d(TAG, document.getId() + " => " + document.getData());
-                                                        Log.d(TAG, document.getId() + " => " + document.get("note_title"));
-                                                        Log.d(TAG, document.getId() + " => " + document.get("note_content"));
-
-
-
-                                                    }
-                                                } else {
-                                                    Log.d(TAG, "Error getting documents: ", task.getException());
-                                                }
-                                            }
-                                        });
-
-                            }
-
-
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
 }

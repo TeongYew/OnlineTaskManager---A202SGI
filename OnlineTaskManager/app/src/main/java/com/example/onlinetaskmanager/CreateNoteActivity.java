@@ -85,7 +85,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 //                        .format(new Date())
 //        );
 
-        getNoteWithNoteId();
+        //getNoteWithNoteId();
         //getAllNotesWithUserId();
 
         //Button back to main menu. (need to add confirmation as well, "unsaved noted will be deleted")
@@ -223,7 +223,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                 DateButton.setText("Date");
                 TimeButton.setText("Time");
                 //testing delete note method
-                deleteNote("44AG5nNic6H0c3PWoSKh");
+                //deleteNote("44AG5nNic6H0c3PWoSKh");
             }
         });
 
@@ -240,11 +240,13 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.put("note_id", testnoteID);
 
         //check if dueDateTime has been set
+        //only add due_date_time if it has been set
         if (!DateButton.getText().toString().equals("Date") && !TimeButton.getText().toString().equals("Time")){
             Date dueDateTimeStamp = c.getTime();
             note.put("due_date_time", dueDateTimeStamp);
         }
 
+        //first create a new note in the notes collection in firestore
         db.collection("notes")
                 .add(note)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -252,10 +254,12 @@ public class CreateNoteActivity extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         Toast.makeText(CreateNoteActivity.this, R.string.CreationSuccess, Toast.LENGTH_SHORT).show();
-                        realNoteId = documentReference.getId();
 
+                        //once the note is created, get the firestore generated id
+                        realNoteId = documentReference.getId();
                         Log.d(TAG, "saveNote: got to the update:" + realNoteId);
 
+                        //update the newly created note's note_id with the firestore generated id
                         db.collection("notes")
                                 .document(realNoteId)
                                 .update("note_id", realNoteId)
@@ -268,6 +272,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                                         notes_users.put("notes_id", realNoteId); //generate user ID then add here to add to firestore.
                                         notes_users.put("user_id", dummyuserID); //find a way to pull user id for now can use dummy for testing.
 
+                                        //create a new notes_user using the user_id and the note_id(firestore generated id)
                                         db.collection("notes_users")
                                                 .add(notes_users)
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -459,13 +464,6 @@ public class CreateNoteActivity extends AppCompatActivity {
             intent.setData(CalendarContract.Events.CONTENT_URI);
             intent.putExtra(CalendarContract.Events.TITLE, EntryTitle.getText().toString());
 
-            //extra features to include
-            intent.putExtra(CalendarContract.Events.ALL_DAY, true);
-            if (!DateButton.getText().toString().equals("Date") && !TimeButton.getText().toString().equals("Time")){
-                Log.d(TAG, "setCalendar: got into setting time");
-                intent.putExtra(CalendarContract.Events.DTSTART, c.getTimeInMillis());
-                intent.putExtra(CalendarContract.Events.DTEND, c.getTimeInMillis());
-            }
 
 
             try{

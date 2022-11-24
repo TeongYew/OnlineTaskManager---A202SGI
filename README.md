@@ -9,12 +9,13 @@ List of Tasks:
 
 Tasks #1 [Faisal]
 - Login/Register System
-  - basic login and register
+  - Basic login and register using Firebase Auth
   - Login with Google Account
-  - forgot/reset password
+  - Forgot/reset password
 - User Profile/Settings
-  - display user data
-  - edit user data(username, password)
+  - Display user data
+  - Edit user data (username, password)
+  - Logout
 
 Tasks #2 [woei lee]
 - Main Menu

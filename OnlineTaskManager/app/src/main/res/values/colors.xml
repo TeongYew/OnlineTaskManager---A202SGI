@@ -7,10 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#292929</color>
+    <color name="colorPrimary">#9F9AE7</color>
     <color name="colorPrimaryDark">#292929</color>
     <color name="colorSearchBar">#3B3B3B</color>
     <color name="SearchTextHint">#BCAAA4</color>
-    <color name="SearchTextHintLight">#999CA8</color>
+    <color name="SearchTextHintLight">#3b3b3b</color>
     <color name="AddNoteButton">#b02bfc</color>
+    <color name="ButtonPrimary">#7671DE</color>
+    <color name="ButtonSecondary">#f0f2bf</color>
+    <color name="OutlineColor">#737373</color>
 </resources>

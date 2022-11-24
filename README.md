@@ -1,4 +1,4 @@
-# OnlineTaskManager---A202SGI
+# OnlineNotingApp---A202SGI
 
 Brief Description of the App:
 
@@ -11,7 +11,7 @@ Tasks #1 [Faisal]
 - Login/Register System
   - basic login and register
   - Login with Google Account
-  - forgot/reset password *extra, do if possible
+  - forgot/reset password
 - User Profile/Settings
   - display user data
   - edit user data(username, password)

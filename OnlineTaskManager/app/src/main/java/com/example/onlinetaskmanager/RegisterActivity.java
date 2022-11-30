@@ -77,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    // Function to register user by Firebase Auth
     private void PerformAuth() {
         String username = txtUsername.getText().toString();
         String email = txtEmail.getText().toString();

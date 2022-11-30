@@ -145,9 +145,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000){
+            // Initialize sign in account
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try{
+                // Get sign in token from Google Sign In client
                 task.getResult(ApiException.class);
                 sendUserToNextActivity();
             } catch (ApiException e){

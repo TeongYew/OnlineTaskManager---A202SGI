@@ -56,6 +56,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void resetPassword(){
+        // Get email from user text input
         String email = txtPasswordResetEmail.getText().toString();
 
         if (TextUtils.isEmpty(email)){ // Check if forgot password email is empty
@@ -71,7 +72,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             progressDialog.show();
 
             mAuth = FirebaseAuth.getInstance();
-            // Send password reset email
+            // Send password reset email to user inputted email
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

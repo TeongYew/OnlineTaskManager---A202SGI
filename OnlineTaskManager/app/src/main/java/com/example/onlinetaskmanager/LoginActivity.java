@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try{
-                // Get sign in token from Google Sign In client
+                // Get sign in token from Google Sign In client API
                 task.getResult(ApiException.class);
                 sendUserToNextActivity();
             } catch (ApiException e){
